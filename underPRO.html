@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحه ذكرني</title>
+  <link rel="icon" type="image/png" href="icon_thakkrni.jpg">
+
+  <style>
+:root {
+  --main-orange: #1b5e20;   /* أخضر أساسي */
+  --dark-orange: #0f3d1c;   /* أخضر داكن */
+  --light-cream: #f4faf6;   /* أخضر فاتح */
+  --soft-cream: #e8f3ec;    /* أخضر ناعم */
+  --text-dark: #1f2f25;     /* نص داكن */
+  --main-white: #ffffff;
+}
+
+/* المتغيرات الإضافية */
+:root{
+  --main:#1b5e20;
+  --dark:#0f3d1c;
+  --bg:#f4faf6;
+}
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--light-cream), var(--soft-cream));
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background: radial-gradient(circle at top, var(--main-orange), var(--dark-orange));
+      color: #fff;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .container {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .coming-box {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      border-top: 4px solid var(--main-orange);
+    }
+
+    .coming-box h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: var(--text-dark);
+    }
+
+    .coming-box p {
+      margin: 0;
+      font-size: 18px;
+      color: #6b4b2e;
+    }
+
+    .home-btn {
+      margin-top: 25px;
+      padding: 10px 26px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: var(--main-orange);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .home-btn:hover {
+      background: var(--dark-orange);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #6b4b2e;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px;
+      background: var(--dark-orange);
+      color: #fff;
+      font-size: 14px;
+    }
+
+section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="coming-box">
+    <h2>قريباً...</h2>
+      <p>هذه الصفحة قيد التطوير حالياً، ترقّبوا التحديثات القادمة بإذن الله.</p>
+      <p>نودّ التنويه بأن البوت يعمل بشكل كامل ويمكن استخدامه خلال فترة التطوير.</p>
+    <a href="index.html" class="home-btn">العودة للصفحة الرئيسية</a>
+  </div>
+</div>
+
+
+  <section>
+    <p>
+هذا المشروع صدقة جارية لي ولوالدي ولكم ولكل المسلمين والمسلمات، نسأل الله أن يتقبله منا ومنكم
+    </p>
+  </section>
+
+  <footer>
+    © 2026 جميع الحقوق محفوظة
+  </footer>
+</body>
+</html>

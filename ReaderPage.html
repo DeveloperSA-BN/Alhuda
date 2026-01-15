@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحه ذكرني</title>
+    <link rel="icon" type="image/png" href="icon_thakkrni.jpg">
+
+  <style>
+    :root {
+  --main-orange: #1b5e20;   /* أخضر أساسي */
+  --dark-orange: #0f3d1c;   /* أخضر داكن */
+  --light-cream: #f4faf6;   /* أخضر فاتح */
+  --soft-cream: #e8f3ec;    /* أخضر ناعم */
+  --text-dark: #1f2f25;     /* نص داكن */
+  --main-white: #ffffff;
+}
+
+/* المتغيرات الإضافية */
+:root{
+  --main:#1b5e20;
+  --dark:#0f3d1c;
+  --bg:#f4faf6;
+}
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--light-cream), var(--soft-cream));
+      color: var(--text-dark);
+    }
+    @media (max-width: 600px) {
+    header {
+      padding: 20px 10px;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    header p {
+      font-size: 13px;
+    }
+  }
+    header {
+  padding: 30px 20px;   /* بدل 70px */
+  text-align: center;
+  background: radial-gradient(circle at top, var(--main-orange), var(--dark-orange));
+  color: #fff;
+}
+
+header h1 {
+  font-size: 28px;      /* بدل 42px */
+  margin-bottom: 6px;
+}
+
+header p {
+  font-size: 14px;      /* بدل 18px */
+  opacity: 0.9;
+}
+
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 30px;
+      background: #fff;
+      color: var(--dark-orange);
+      font-size: 18px;
+      text-decoration: none;
+      border-radius: 14px;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+
+    }
+    .btn:hover {
+      transition: 0.3s;
+      background: var(--main-orange);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+      }
+
+
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+    section h2 {
+      color: var(--dark-orange);
+      margin-bottom: 25px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: linear-gradient(180deg, #ffffff, #faf7f2);
+      border-radius: 22px;
+      padding: 26px 22px 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      border: 1px solid rgba(0,0,0,0.04);
+      text-align: center;
+      transition: 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--main-orange), var(--dark-orange));
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+    }
+
+    .card h3 {
+      margin: 20px 0 10px;
+      font-size: 20px;
+      color: var(--dark-orange);
+    }
+
+    .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin-bottom: 18px;
+}
+
+
+.card-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  background: linear-gradient(135deg, var(--main-orange), var(--dark-orange));
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+
+    footer {
+      text-align: center;
+      padding: 35px;
+      background: var(--dark-orange);
+      color: #fff;
+      font-size: 14px;
+    }
+      .feature-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: var(--main-orange);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .feature-btn:hover {
+  background: var(--main-white);
+  color: var(--main-orange);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+
+
+.download-btn {
+  padding: 6px 14px;          /* أصغر */
+  border: none;
+  border-radius: 8px;         /* أصغر */
+  background: var(--main-orange);
+  color: #fff;
+  font-size: 14px;            /* أصغر */
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;            /* أصغر */
+  display: inline-block;
+  text-decoration: none;
+  transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* ظل أخف */
+}
+
+.download-btn:hover {
+  background: var(--main-white);
+  color: var(--text-dark);
+  transform: translateY(-2px); /* حركة أخف */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🔉 استماع القرآن</h1>
+
+
+  <button class="download-btn" onclick="window.location.reload();">تحديث الصفحة</button>
+  <a class="download-btn" href="index.html">العودة للقائمة الرئيسية</a>
+
+  </header>
+
+<section>
+  <div class="features">
+
+    <div class="card">
+      <div class="card-icon">🔉</div>
+      <h3>الشيخ عبدالرحمن السديس</h3>
+      <a class="feature-btn" href="SoundsPage_R1.html">الدخول</a>
+    </div>
+
+
+    <div class="card">
+      <div class="card-icon">🔉</div>
+      <h3>الشيخ علي جابر</h3>
+      <a class="feature-btn" href="underPRO.html">الدخول</a>
+    </div>
+
+
+      <div class="card">
+      <div class="card-icon">🔉</div>
+      <h3>الشيخ ياسر الدوسري</h3>
+      <a class="feature-btn" href="underPRO.html">الدخول</a>
+    </div>
+
+
+      <div class="card">
+      <div class="card-icon">🔉</div>
+      <h3>الشيخ سعيد الخطيب</h3>
+      <a class="feature-btn" href="underPRO.html">الدخول</a>
+    </div>
+
+  </div>
+</section>
+
+  <section>
+    <p>
+هذا المشروع صدقة جارية لي ولوالدي ولكم ولكل المسلمين والمسلمات، نسأل الله أن يتقبله منا ومنكم
+    </p>
+  </section>
+
+  <footer>
+    © 2026 جميع الحقوق محفوظة
+  </footer>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحه ذكرني</title>
+    <link rel="icon" type="image/png" href="icon_thakkrni.jpg">
+
+
+  <style>
+    :root {
+  --main-orange: #1b5e20;   /* أخضر أساسي */
+  --dark-orange: #0f3d1c;   /* أخضر داكن */
+  --light-cream: #f4faf6;   /* أخضر فاتح */
+  --soft-cream: #e8f3ec;    /* أخضر ناعم */
+  --text-dark: #1f2f25;     /* نص داكن */
+  --main-white: #ffffff;
+}
+
+/* المتغيرات الإضافية */
+:root{
+  --main:#1b5e20;
+  --dark:#0f3d1c;
+  --bg:#f4faf6;
+}
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--light-cream), var(--soft-cream));
+      color: var(--text-dark);
+    }
+
+    header {
+  padding: 12px 15px;   /* كان 20px — الآن أصغر */
+  text-align: center;
+  background: radial-gradient(circle at top, var(--main-orange), var(--dark-orange));
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;      /* كان 26px — الآن أنحف */
+  font-weight: bold;
+}
+
+  @media (max-width: 600px) {
+  header {
+    padding: 10px 10px;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+}
+
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .surah-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+    }
+
+    .surah {
+      background: #fff;
+      padding: 15px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-top: 4px solid var(--main-orange);
+      color: var(--text-dark);
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .surah:hover {
+      background: var(--main-orange);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    }
+
+    #viewer {
+      display: none;
+      margin-top: 30px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 900px;
+      border-radius: 14px;
+      border: 2px solid var(--main-orange);
+      background: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+      color: #6b4b2e;
+      }
+.reload-btn {
+  padding: 6px 14px;        /* أصغر */
+  border: none;
+  border-radius: 8px;       /* أصغر */
+  background: var(--main-orange);
+  color: #fff;
+  font-size: 13px;          /* أصغر */
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;          /* أصغر */
+  transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* ظل أخف */
+}
+
+.reload-btn:hover {
+  background: var(--dark-orange);
+  transform: translateY(-2px); /* حركة أخف */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+.btn{
+  background:var(--main);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:6px 14px;
+  cursor:pointer;
+  margin:4px;
+  font-weight:bold;
+}
+
+:root {
+  --main-white: #ffffff;
+}
+.download-btn {
+  padding: 6px 14px;          /* أصغر */
+  border: none;
+  border-radius: 8px;         /* أصغر */
+  background: var(--main-orange);
+  color: #fff;
+  font-size: 14px;            /* أصغر */
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;            /* أصغر */
+  display: inline-block;
+  text-decoration: none;
+  transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* ظل أخف */
+}
+
+.download-btn:hover {
+  background: var(--main-white);
+  color: var(--text-dark);
+  transform: translateY(-2px); /* حركة أخف */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+footer {
+      text-align: center;
+      padding: 35px;
+      background: var(--dark-orange);
+      color: #fff;
+      font-size: 14px;
+    }
+
+section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+    section h2 {
+      color: var(--dark-orange);
+      margin-bottom: 25px;
+    }
+
+.controls{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+
+.controls span{
+  margin-bottom: 6px;
+}
+
+
+canvas{
+  width:100%;
+  background:#fff;
+  border-radius:14px;
+  border:2px solid var(--main);
+}
+
+footer{
+  margin-top:40px;
+  padding:30px;
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+
+}
+.btn {
+  font-size: 25px;      /* يكبر النص */
+  padding: 16px 28px;   /* يكبر الزر */
+}
+
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+</head>
+
+<body>
+
+
+<header>
+  <h1>📖 القرآن الكريم</h1>
+  <button class="download-btn" onclick="window.location.reload();">تحديث الصفحة</button>
+
+  <a class="download-btn" href="index.html">العودة للقائمة الرئيسية</a>
+
+
+  <a href="quran.pdf" download class="download-btn">تحميل المصحف كاملا</a>
+
+</header>
+
+
+<div class="container">
+
+  <div class="surah-list">
+    <!-- نفس أسماء الدالة حرفيًا -->
+    <div class="surah" onclick="openSurah('سورة الفاتحة')">الفاتحة</div>
+    <div class="surah" onclick="openSurah('سورة البقرة')">البقرة</div>
+    <div class="surah" onclick="openSurah('سورة آل عمران')">آل عمران</div>
+    <div class="surah" onclick="openSurah('سورة النساء')">النساء</div>
+    <div class="surah" onclick="openSurah('سورة المائدة')">المائدة</div>
+    <div class="surah" onclick="openSurah('سورة الأنعام')">الأنعام</div>
+    <div class="surah" onclick="openSurah('سورة الأعراف')">الأعراف</div>
+    <div class="surah" onclick="openSurah('سورة الأنفال')">الأنفال</div>
+    <div class="surah" onclick="openSurah('سورة التوبة')">التوبة</div>
+    <div class="surah" onclick="openSurah('سورة يونس')">يونس</div>
+    <div class="surah" onclick="openSurah('سورة هود')">هود</div>
+    <div class="surah" onclick="openSurah('سورة يوسف')">يوسف</div>
+    <div class="surah" onclick="openSurah('سورة الرعد')">الرعد</div>
+    <div class="surah" onclick="openSurah('سورة إبراهيم')">إبراهيم</div>
+    <div class="surah" onclick="openSurah('سورة الحجر')">الحجر</div>
+    <div class="surah" onclick="openSurah('سورة النحل')">النحل</div>
+    <div class="surah" onclick="openSurah('سورة الإسراء')">الإسراء</div>
+    <div class="surah" onclick="openSurah('سورة الكهف')">الكهف</div>
+    <div class="surah" onclick="openSurah('سورة مريم')">مريم</div>
+    <div class="surah" onclick="openSurah('سورة طه')">طه</div>
+    <div class="surah" onclick="openSurah('سورة الأنبياء')">الأنبياء</div>
+    <div class="surah" onclick="openSurah('سورة الحج')">الحج</div>
+    <div class="surah" onclick="openSurah('سورة المؤمنون')">المؤمنون</div>
+    <div class="surah" onclick="openSurah('سورة النور')">النور</div>
+    <div class="surah" onclick="openSurah('سورة الفرقان')">الفرقان</div>
+    <div class="surah" onclick="openSurah('سورة الشعراء')">الشعراء</div>
+    <div class="surah" onclick="openSurah('سورة النمل')">النمل</div>
+    <div class="surah" onclick="openSurah('سورة القصص')">القصص</div>
+    <div class="surah" onclick="openSurah('سورة العنكبوت')">العنكبوت</div>
+    <div class="surah" onclick="openSurah('سورة الروم')">الروم</div>
+    <div class="surah" onclick="openSurah('سورة لقمان')">لقمان</div>
+    <div class="surah" onclick="openSurah('سورة السجدة')">السجدة</div>
+    <div class="surah" onclick="openSurah('سورة الأحزاب')">الأحزاب</div>
+    <div class="surah" onclick="openSurah('سورة سبأ')">سبأ</div>
+    <div class="surah" onclick="openSurah('سورة فاطر')">فاطر</div>
+    <div class="surah" onclick="openSurah('سورة يس')">يس</div>
+    <div class="surah" onclick="openSurah('سورة الصافات')">الصافات</div>
+    <div class="surah" onclick="openSurah('سورة ص')">ص</div>
+    <div class="surah" onclick="openSurah('سورة الزمر')">الزمر</div>
+    <div class="surah" onclick="openSurah('سورة غافر')">غافر</div>
+    <div class="surah" onclick="openSurah('سورة فصلت')">فصلت</div>
+    <div class="surah" onclick="openSurah('سورة الشورى')">الشورى</div>
+    <div class="surah" onclick="openSurah('سورة الزخرف')">الزخرف</div>
+    <div class="surah" onclick="openSurah('سورة الدخان')">الدخان</div>
+    <div class="surah" onclick="openSurah('سورة الجاثية')">الجاثية</div>
+    <div class="surah" onclick="openSurah('سورة الأحقاف')">الأحقاف</div>
+    <div class="surah" onclick="openSurah('سورة محمد')">محمد</div>
+    <div class="surah" onclick="openSurah('سورة الفتح')">الفتح</div>
+    <div class="surah" onclick="openSurah('سورة الحجرات')">الحجرات</div>
+    <div class="surah" onclick="openSurah('سورة ق')">ق</div>
+    <div class="surah" onclick="openSurah('سورة الذاريات')">الذاريات</div>
+    <div class="surah" onclick="openSurah('سورة الطور')">الطور</div>
+    <div class="surah" onclick="openSurah('سورة النجم')">النجم</div>
+    <div class="surah" onclick="openSurah('سورة القمر')">القمر</div>
+    <div class="surah" onclick="openSurah('سورة الرحمن')">الرحمن</div>
+    <div class="surah" onclick="openSurah('سورة الواقعة')">الواقعة</div>
+    <div class="surah" onclick="openSurah('سورة الحديد')">الحديد</div>
+    <div class="surah" onclick="openSurah('سورة المجادلة')">المجادلة</div>
+    <div class="surah" onclick="openSurah('سورة الحشر')">الحشر</div>
+    <div class="surah" onclick="openSurah('سورة الممتحنة')">الممتحنة</div>
+    <div class="surah" onclick="openSurah('سورة الصف')">الصف</div>
+    <div class="surah" onclick="openSurah('سورة الجمعة')">الجمعة</div>
+    <div class="surah" onclick="openSurah('سورة المنافقون')">المنافقون</div>
+    <div class="surah" onclick="openSurah('سورة التغابن')">التغابن</div>
+    <div class="surah" onclick="openSurah('سورة الطلاق')">الطلاق</div>
+    <div class="surah" onclick="openSurah('سورة التحريم')">التحريم</div>
+    <div class="surah" onclick="openSurah('سورة الملك')">الملك</div>
+    <div class="surah" onclick="openSurah('سورة القلم')">القلم</div>
+    <div class="surah" onclick="openSurah('سورة الحاقة')">الحاقة</div>
+    <div class="surah" onclick="openSurah('سورة المعارج')">المعارج</div>
+    <div class="surah" onclick="openSurah('سورة نوح')">نوح</div>
+    <div class="surah" onclick="openSurah('سورة الجن')">الجن</div>
+    <div class="surah" onclick="openSurah('سورة المزمل')">المزمل</div>
+    <div class="surah" onclick="openSurah('سورة المدثر')">المدثر</div>
+    <div class="surah" onclick="openSurah('سورة القيامة')">القيامة</div>
+    <div class="surah" onclick="openSurah('سورة الإنسان')">الإنسان</div>
+    <div class="surah" onclick="openSurah('سورة المرسلات')">المرسلات</div>
+    <div class="surah" onclick="openSurah('جزء عم')">جزء عم</div>
+  </div>
+
+<div id="viewer">
+
+
+
+  <canvas id="pdfCanvas"></canvas>
+
+</div>
+
+</div>
+
+<script>
+const SURA_PAGES = {
+  "سورة الفاتحة": [1, 1],
+  "سورة البقرة": [2, 48],
+  "سورة آل عمران": [50, 75],
+  "سورة النساء": [77, 105],
+  "سورة المائدة": [107, 126],
+  "سورة الأنعام": [128, 149],
+  "سورة الأعراف": [157, 175],
+  "سورة الأنفال": [177, 185],
+  "سورة التوبة": [187, 208],
+  "سورة يونس": [210, 220],
+  "سورة هود": [221, 234],
+  "سورة يوسف": [235, 247],
+  "سورة الرعد": [249, 254],
+  "سورة إبراهيم": [255, 260],
+  "سورة الحجر": [262, 266],
+  "سورة النحل": [267, 281],
+  "سورة الإسراء": [282, 292],
+  "سورة الكهف": [293, 303],
+  "سورة مريم": [304, 311],
+  "سورة طه": [312, 320],
+  "سورة الأنبياء": [322, 330],
+  "سورة الحج": [332, 340],
+  "سورة المؤمنون": [342, 348],
+  "سورة النور": [350, 358],
+  "سورة الفرقان": [359, 365],
+  "سورة الشعراء": [367, 375],
+  "سورة النمل": [377, 384],
+  "سورة القصص": [385, 395],
+  "سورة العنكبوت": [396, 403],
+  "سورة الروم": [404, 409],
+  "سورة لقمان": [411, 413],
+  "سورة السجدة": [415, 416],
+  "سورة الأحزاب": [418, 426],
+  "سورة سبأ": [428, 433],
+  "سورة فاطر": [434, 439],
+  "سورة يس": [440, 444],
+  "سورة الصافات": [446, 451],
+  "سورة ص": [453, 457],
+  "سورة الزمر": [458, 466],
+  "سورة غافر": [467, 475],
+  "سورة فصلت": [477, 481],
+  "سورة الشورى": [483, 488],
+  "سورة الزخرف": [489, 494],
+  "سورة الدخان": [496, 497],
+  "سورة الجاثية": [499, 501],
+  "سورة الأحقاف": [502, 505],
+  "سورة محمد": [507, 509],
+  "سورة الفتح": [511, 514],
+  "سورة الحجرات": [515, 516],
+  "سورة ق": [518, 519],
+  "سورة الذاريات": [520, 522],
+  "سورة الطور": [523, 524],
+  "سورة النجم": [526, 527],
+  "سورة القمر": [528, 530],
+  "سورة الرحمن": [531, 533],
+  "سورة الواقعة": [534, 536],
+  "سورة الحديد": [537, 540],
+  "سورة المجادلة": [541, 544],
+  "سورة الحشر": [545, 547],
+  "سورة الممتحنة": [549, 550],
+  "سورة الصف": [551, 551],
+  "سورة الجمعة": [553, 553],
+  "سورة المنافقون": [554, 554],
+  "سورة التغابن": [556, 556],
+  "سورة الطلاق": [558, 558],
+  "سورة التحريم": [560, 560],
+  "سورة الملك": [562, 563],
+  "سورة القلم": [564, 565],
+  "سورة الحاقة": [566, 567],
+  "سورة المعارج": [568, 569],
+  "سورة نوح": [570, 570],
+  "سورة الجن": [572, 572],
+  "سورة المزمل": [574, 574],
+  "سورة المدثر": [575, 576],
+  "سورة القيامة": [577, 577],
+  "سورة الإنسان": [578, 579],
+  "سورة المرسلات": [580, 580],
+  "جزء عم": [582, 603]
+};
+
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+let pdfDoc=null;
+let pageNum=1;
+let scale=1.4;
+const canvas=document.getElementById("pdfCanvas");
+const ctx=canvas.getContext("2d");
+
+function openSurah(name){
+  pageNum=SURA_PAGES[name][0];
+  document.getElementById("viewer").style.display="block";
+
+  pdfjsLib.getDocument("quran.pdf").promise.then(pdf=>{
+    pdfDoc=pdf;
+    document.getElementById("pageCount").textContent=pdf.numPages;
+    renderPage();
+    document.getElementById("viewer").scrollIntoView({behavior:"smooth"});
+  });
+}
+
+function renderPage(){
+  pdfDoc.getPage(pageNum).then(page=>{
+    const viewport=page.getViewport({scale});
+    canvas.height=viewport.height;
+    canvas.width=viewport.width;
+
+    page.render({canvasContext:ctx,viewport});
+    document.getElementById("pageNum").textContent=pageNum;
+  });
+}
+
+function nextPage(){
+  if(pageNum>=pdfDoc.numPages)return;
+  pageNum++;
+  renderPage();
+}
+
+function prevPage(){
+  if(pageNum<=1)return;
+  pageNum--;
+  renderPage();
+}
+
+function zoomIn(){scale+=0.2;renderPage();}
+function zoomOut(){if(scale>0.6){scale-=0.2;renderPage();}}
+
+
+</script>
+<div id="viewer" style="display:none; margin-top:20px;">
+  <canvas id="pdfCanvas" style="width:100%; border-radius:14px; border:2px solid #d66a1f;"></canvas>
+</div>
+<div class="controls">
+
+    <button class="btn" onclick="prevPage()">▶ السابق</button>
+    <span>صفحة <span id="pageNum">1</span> / <span id="pageCount">0</span></span>
+
+    <button class="btn" onclick="nextPage()">◀ التالي </button>
+
+  </div>
+  <section>
+    <p>
+هذا المشروع صدقة جارية لي ولوالدي ولكم ولكل المسلمين والمسلمات، نسأل الله أن يتقبله منا ومنكم
+    </p>
+  </section>
+
+  <footer>
+    © 2026 جميع الحقوق محفوظة
+  </footer>
+
+</body>
+</html>

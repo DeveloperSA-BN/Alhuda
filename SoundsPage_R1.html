@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>صفحه ذكرني</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="imgs/icon_thakkrni.jpg">
+
+  <style>
+:root {
+  --main-orange: #1b5e20;
+  --dark-orange: #0f3d1c;
+  --light-cream: #f4faf6;
+  --soft-cream: #e8f3ec;
+  --text-dark: #1f2f25;
+  --main-white: #ffffff;
+
+  /* متغيرات مستخدمة فعليًا */
+  --primary: #1b5e20;
+  --secondary: #0f3d1c;
+  --bg: #f4faf6;
+  --card: #ffffff;
+  --text: #1f2f25;
+}
+
+
+    * { box-sizing: border-box; font-family: "Cairo", sans-serif; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+
+    .play-btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+
+      /* المهم */
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .play-btn:hover {
+      background: var(--main-white);
+      color: var(--text-dark);
+      transform: translateY(-2px); /* حركة ناعمة */
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    }
+
+    .play-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+    .player {
+      margin-top: 40px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      display: none;
+    }
+.download-btn {
+  padding: 6px 14px;          /* أصغر */
+  border: none;
+  border-radius: 8px;         /* أصغر */
+  background: var(--main-orange);
+  color: #fff;
+  font-size: 14px;            /* أصغر */
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;            /* أصغر */
+  display: inline-block;
+  text-decoration: none;
+  transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* ظل أخف */
+}
+
+.download-btn:hover {
+  background: var(--main-white);
+  color: var(--text-dark);
+  transform: translateY(-2px); /* حركة أخف */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+.titleReaderName{
+  font-weight: bold;
+
+}
+.player{
+  margin-top:30px;
+  background:#ffffff;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.12);
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.player h3{
+  text-align:center;
+  margin-bottom:15px;
+  font-size:20px;
+  color:#333;
+}
+
+.audio-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#f4efe6;
+  border-radius:14px;
+  padding:10px;
+}
+
+.audio-box iframe{
+  flex:1;
+  height:80px;
+  border:none;
+  border-radius:12px;
+}
+
+.close-player{
+  background:#eee;
+  border:none;
+  border-radius:50%;
+  width:34px;
+  height:34px;
+  cursor:pointer;
+  font-size:16px;
+  line-height:34px;
+  text-align:center;
+}
+
+.close-player:hover{
+  background:#ddd;
+}
+
+    audio { width: 100%; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔉 استماع القرآن الكريم</h1>
+  <p class="titleReaderName"> جميع سور القرآن الكريم بصوت الشيخ عبدالرحمن السديس ( حفظه الله )</p>
+
+  <button class="download-btn" onclick="window.location.reload();">تحديث الصفحة</button>
+  <a class="download-btn" href="index.html">العودة للقائمة الرئيسية</a>
+  <a class="download-btn" href="ReaderPage.html">العودة للقائمة القراء</a>
+
+</header>
+<div class="audio-box">
+  <iframe id="audioPlayer"
+      src="https://drive.google.com/file/d/1h1cOB4WeZI4WdZToHiC1NB4MViQMQfRC/preview"
+      allow="autoplay">
+  </iframe>
+
+</div>
+
+<div class="container">
+  <div class="grid" id="surahList"></div>
+</div>
+
+
+
+<script>
+const surahList = document.getElementById("surahList");
+const player = document.getElementById("player");
+const iframe = document.getElementById("audioPlayer");
+const title = document.getElementById("currentSurah");
+
+/*
+  🔊 القارئ R1
+  كل سورة = Google Drive ID
+https://drive.google.com/file/d//view?usp=drive_link
+*/
+const surahs_R1 = [
+  { name: "سورة الفاتحة", id: "11-VHWD3dyJY29tIcgq6xfqij3GUWaUjH" },
+  { name: "سورة البقرة", id: "1h1cOB4WeZI4WdZToHiC1NB4MViQMQfRC" },
+  { name: "سورة آل عمران", id: "1D0D7sxvxYyUhQWGDRZU99IUIdwdL_ls3" },
+  { name: "سورة النساء", id: "1iHGFRwp5Ssxyc7CGxZXZGamD2ZvWFa7N" },
+  { name: "سورة المائدة", id: "11nd56fWnqbgD40GJdpmkd0oUFpk14AnE" },
+  { name: "سورة الأنعام", id: "1lMP_YwUGeR7slb3ZXGB7DbhCFNRNQ2Aw" },
+  { name: "سورة الأعراف", id: "1Ftd_LFYYjhpS6WOf1oO0GHoD3Bt6gpMS" },
+  { name: "سورة الأنفال", id: "1rAzT_0f-Oa12Ne2nlpQtrZT7GH4dyi9r" },
+  { name: "سورة التوبة", id: "1dMo7PmNCmYxw0mGRKaA8XlpMMe37aQ9a" },
+  { name: "سورة يونس", id: "1-lRR-TjePUYcx4CEHmIl5COCYBf12UIc" },
+
+  { name: "سورة هود", id: "1XLWrOxu8xctUIcIifs3Uj7HBr2MYnvwy" },
+  { name: "سورة يوسف", id: "1bSV8b1iUixPaZnJsM3eYb-n4uYeihs1b" },
+  { name: "سورة الرعد", id: "1iSpeM58jG6cV9hjfgx7HAvZjdAvgTY-u" },
+  { name: "سورة إبراهيم", id: "1ISbLJ5sXkx_u7OdBSY53392izDaLPDlF" },
+  { name: "سورة الحجر", id: "1A0RpEFOifMRQ2uWd61LAHswGw-sdT4Fs" },
+  { name: "سورة النحل", id: "1sZ5oUdVNJKFpFnVaiHJjicvjYIip2k2F" },
+  { name: "سورة الإسراء", id: "14GdhMO_R1xN8I5XR2c-GCL71er1K6Xsg/" },
+  { name: "سورة الكهف", id: "1f1vdJT7s1eKa--8cxH3IzJYai0mHiVxo" },
+  { name: "سورة مريم", id: "1DiOzDeO8hYpg4FaI-STr0gLRB0MPAhd4" },
+  { name: "سورة طه", id: "1AKr9zzNIvfloSGy77ZuvR35MlQ-GAhya" },
+
+  { name: "سورة الأنبياء", id: "1bD3G_LAcOrTkt02P_vcRt0emKUE_Kujj" },
+  { name: "سورة الحج", id: "1OQBxuJSD1NVyO-7W_kfsSMfAOgqsIpqt" },
+  { name: "سورة المؤمنون", id: "1XhOfWzhsNgMhRO05u_stLSyjhMO2bM3B" },
+  { name: "سورة النور", id: "1iIV7acNMbQl9Kv31QDBlxjVMlfZvgUzz" },
+  { name: "سورة الفرقان", id: "1C9JGwaKnZFNk2Ar5tfgXXD0wozzauca0" },
+  { name: "سورة الشعراء", id: "1AzsBsjOEso1BWS6hnXwZ4NdQDUKbbLSY" },
+  { name: "سورة النمل", id: "1SyPEcDleSCGWWimQkNPG1njBHUDztfgx" },
+  { name: "سورة القصص", id: "13hPSaBOl_dw-lybv37Y1Hv2G9bP-I-o_" },
+  { name: "سورة العنكبوت", id: "1vRLc4whc4n9UwDIlwKnrpo4xllw3n1cr" },
+  { name: "سورة الروم", id: "1kYo-TgNVVf9-6SwXegTDA2h4xBTmOXfg" },
+
+  { name: "سورة لقمان", id: "1SgYCocOSqMS0NqTuCpelMsQ1vwzn__xv" },
+  { name: "سورة السجدة", id: "1ofkmOPDuCSAostnpSvxQrBPhXEDJ-HWp" },
+  { name: "سورة الأحزاب", id: "1wPaJuDaCfmjUkLm3OmftdWHxHgBRiXu1" },
+  { name: "سورة سبأ", id: "1X8qqsOy4YLBNMrJ_2wtc7sbYjiGr2HBH" },
+  { name: "سورة فاطر", id: "1gbajFlWh25kF4Lgn6eHDRQ2-6quzZDj3" },
+  { name: "سورة يس", id: "1eTbSIkt6tufstL9VkXtgtzuau7N2Qb8F" },
+  { name: "سورة الصافات", id: "1jKXFJ4AQl7jGaIRdAOVYONDf4M9aLZsn" },
+  { name: "سورة ص", id: "1_b1b9xa3SohY9JD8lqhjApTX6_EtsFFg" },
+  { name: "سورة الزمر", id: "1WYvoC_87wgsw7tR58lWPx-Vr4xv_0c-j" },
+  { name: "سورة غافر", id: "15LUO4lticdTwj3Zhj88F-oZyZOoi2Drb" },
+
+  { name: "سورة فصلت", id: "1zMkoD04iHGuvbd5PjF9Bfyb8hBp0tjY9" },
+  { name: "سورة الشورى", id: "10hPsvHnd656pc4uah86sF69CxbzYpoQJ" },
+  { name: "سورة الزخرف", id: "1b9Sc-1_HSuNTCF2sQJe66sR_l9pEPZXd" },
+  { name: "سورة الدخان", id: "1uFsTA5z-ezIKG1IEWSYXLpl669EwEx_a" },
+  { name: "سورة الجاثية", id: "1xy7KczOTiPSJnXUgoR1bKUYAJye6tbqb" },
+  { name: "سورة الأحقاف", id: "1zuAl3QQjOlMA0_cUV5UghmtUcbd0zyVz" },
+  { name: "سورة محمد", id: "1fosSWPRWKIaXdvjGZF53BxDWuuaRW7Wq" },
+  { name: "سورة الفتح", id: "162cfZ8yGQwZF3IGVXLPwqG8GsKX7TBSc" },
+  { name: "سورة الحجرات", id: "17YY2A5odgCjFWLN7T5ummqi8vSvDb9LW" },
+  { name: "سورة ق", id: "1ST0P2BijA5te_JyoqTctFcwo2hPNbxvJ" },
+
+  { name: "سورة الذاريات", id: "1TAW3Ttn_nFBtyY2NZCZQ6jSWxF06vz9O" },
+  { name: "سورة الطور", id: "1mhKLq1HwjeJpv3-EdhiyTs1Mulazzx1S" },
+  { name: "سورة النجم", id: "1EHr12lTJOAN0WtR2IwQJLgIKaf5Toq51" },
+  { name: "سورة القمر", id: "14vZNFRwYzjX6ZeWglfw7TQr9zoNUoWO7" },
+  { name: "سورة الرحمن", id: "1Rewri9ULXKPJuiZC125uQiwOAihjCGDi" },
+  { name: "سورة الواقعة", id: "1s3J5LCsmWVWPWV1Zp_8N_Yf1N11vCBG7" },
+  { name: "سورة الحديد", id: "1gRhhvJi58iOOjKfyaRusiZKNTXRirpym" },
+  { name: "سورة المجادلة", id: "1j2y31FGVmnB_BP6hluudVdf_kxzIjhed" },
+  { name: "سورة الحشر", id: "1AoamwUcR2s06bUkJYwB12GrfFlvoAtQB" },
+  { name: "سورة الممتحنة", id: "15s7cuvGw35Bf2ds2YeVuQutDs6IXg5Oy" },
+
+  { name: "سورة الصف", id: "1-NKNp548oK7n-PN9aujKHfeQaEzal7YN" },
+  { name: "سورة الجمعة", id: "13X3e-BMTIV9kXMok-xweCUedNBoXSWCI" },
+  { name: "سورة المنافقون", id: "1IaqsYoZ9sUCK0n_TmZczhE0-pp4-EEqW" },
+  { name: "سورة التغابن", id: "1wEakjMyPy81QzuduAQ0ogMiVczcAOh_Q" },
+  { name: "سورة الطلاق", id: "1-e-ec4XhQ4_7T9jjvrmnGU3r3yCxxPxY" },
+  { name: "سورة التحريم", id: "1nM8Lgf-vGokUA_EHzCZK4NAJSki4X2kr" },
+  { name: "سورة الملك", id: "1F3u2hnCachu8r-zkoJrS2Rj3vvjurCHQ" },
+  { name: "سورة القلم", id: "19gRA-AkJqOQ5LR7vhqjgw6EDGCs-lzoA" },
+  { name: "سورة الحاقة", id: "1mN2hqJg0RMMPEYx-0r74h2bQOQG_NY-L" },
+  { name: "سورة المعارج", id: "13xsgDtm-cw64rsFJgMjPhQ4fP9NV4jgZ" },
+
+  { name: "سورة نوح", id: "1WSPaslO5xyKpg8zyAbRe2ZZSKs-3qE6f" },
+  { name: "سورة الجن", id: "1p10Dox-nqUoKUDo3yNXy7-X2IaZBGHRt" },
+  { name: "سورة المزمل", id: "1vOxqmJ6ZGFSxy4UZZvtEfWcG9_fo0UGR" },
+  { name: "سورة المدثر", id: "1j22FUg2nUaGmJBgFAWbEhC2biQUiVIe_" },
+  { name: "سورة القيامة", id: "1g6MEtrvBQk-zjvVpEkRKNZTbcTk51s7K" },
+  { name: "سورة الإنسان", id: "1qheKFuAE6y0hYiGDx-GVniY_M6K1pCrq" },
+  { name: "سورة المرسلات", id: "1U-wc_eLW8GKikpgqIwU7UXI19tKseP-3" },
+  { name: "سورة النبأ", id: "15YEXZStP1HTH9z9UlDRuDJl8m11f5qcP" },
+  { name: "سورة النازعات", id: "1H-Xi9zLcW8_olAus2iZ-FmIVyZdhPauG" },
+  { name: "سورة عبس", id: "1TLb-6-IYrIrdol87AbUn3J8_HGlx4Bht" },
+
+  { name: "سورة التكوير", id: "1R_EhCmtG4JpX2_FiZZtUExOZC7ijrBEB" },
+  { name: "سورة الانفطار", id: "1a68ErZv0DrTVpCYCV79bdUlQR-PL5JVw" },
+  { name: "سورة المطففين", id: "1J3Q8XwiPg0t16PDTqonDRaECkbOtsM_p" },
+  { name: "سورة الانشقاق", id: "1hK_zZpT3_fWSC9bq1YxONNwunzIxZvYg" },
+  { name: "سورة البروج", id: "16pwiHHpDFSyDPm_NdfrvixHAbQFY21M0" },
+  { name: "سورة الطارق", id: "17UfVDCqBOoXvGwr7TZm3hnn3kCQ-JImn" },
+  { name: "سورة الأعلى", id: "1EgQuaP2UxVdhNjkfN0eLBPJa19JUioki" },
+  { name: "سورة الغاشية", id: "1YN4Qo1lxtoRQeZNDaWbFR-LCJOg64q5-" },
+  { name: "سورة الفجر", id: "1Ox7NEfhWmCqrCml9He8XrLQdS_MBUjsy" },
+  { name: "سورة البلد", id: "1qyoUgapz0O50IJGlCcnPYvlY-LBIcZRV" },
+
+  { name: "سورة الشمس", id: "1W0RVywWc8D7Aj1tlxDZaePEqp324nb2p" },
+  { name: "سورة الليل", id: "1LpmuLGQ-Ht6zYe1NM6keqIEHwY2CDmUS" },
+  { name: "سورة الضحى", id: "1OoRcsZE0_sejyjWAgqJeqoM5lDFwdGrt" },
+  { name: "سورة الشرح", id: "1KlimXb8Cpxzq-SuWbBjNfIo_Kg2pnxIH" },
+  { name: "سورة التين", id: "1FE3C0xlkdc6bgU-T5TCxXvS0hk6ZORQh" },
+  { name: "سورة العلق", id: "1Zhnc4Rm5Pf26WISWzU2Fp5jQimW2NfCw" },
+  { name: "سورة القدر", id: "18z9GGoaQu7aS0C-tOHSiu7an5BzRudnB" },
+  { name: "سورة البينة", id: "1RhUP-CSHfkP1pIjASlWidGlRjHfJaFR7" },
+  { name: "سورة الزلزلة", id: "1MJ3UCEQSEs1CjNmHK2yofjb6SOvzU2Cv" },
+  { name: "سورة العاديات", id: "1G95lHcqFLn5N_z5azTCL2CYrUvJkTMNP" },
+
+  { name: "سورة القارعة", id: "15tM3N0IsleSLKaQ5fXRqNCNLO48ZKFxV" },
+  { name: "سورة التكاثر", id: "1IpDBcUEKhnsb93RRlb0fOPn8hT9YXtby" },
+  { name: "سورة العصر", id: "1T3J8mwt1NEzkcvEZSETxeNwEfzWKfTBN" },
+  { name: "سورة الهمزة", id: "1gAMLER7DH77bQK13OILeRVnGR6FvlyME" },
+  { name: "سورة الفيل", id: "1LGARLPjk3SdjOAWdpY6dJl2mEBCsYWJ2" },
+  { name: "سورة قريش", id: "1AWDHndVQbqJ-WAzYljBgvc1dUbl8xZPR" },
+  { name: "سورة الماعون", id: "1W93KkkZEIRbFrfAVEtKjbPh4kuVeQ6rn" },
+  { name: "سورة الكوثر", id: "16ez06kCkXpqukRzHEQ8TVUZt57m-KdMJ" },
+  { name: "سورة الكافرون", id: "1SIybHQR0wMB3QqxTj_LG4Rrq3BfpyDmu" },
+  { name: "سورة النصر", id: "1a_k0pT5oIv1MCRmnYloKlZrx-pf2pzau" },
+  { name: "سورة المسد", id: "1OkHjtOnS8Y-IdiznEhyZZVe93j_do31Y" },
+  { name: "سورة الإخلاص", id: "1YhMxYnW17QFfnCRSdZcNtxZyZzat-y3E" },
+  { name: "سورة الفلق", id: "1bVjk83xqjObFOe3dFS_OkkSpqv8W-goV" },
+  { name: "سورة الناس", id: "13onr0EgIeJVpP7vJ8PWRILdt6EMMgxay" }
+];
+
+
+surahs_R1.forEach(surah => {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  card.innerHTML = `
+    <h4>${surah.name}</h4>
+    <button class="play-btn">▶ استماع</button>
+  `;
+
+  card.querySelector("button").onclick = () => {
+    title.textContent = surah.name;
+    iframe.src = `https://drive.google.com/file/d/${surah.id}/preview`;
+    player.style.display = "block";
+  };
+
+  surahList.appendChild(card);
+});
+</script>
+<style>
+.audio-box {
+    background: #ffffff; /* الخلفية البيضاء */
+    padding: 15px;
+    border-radius: 14px;
+    width: 350px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.audio-box iframe {
+    width: 100%;
+    height: 80px;
+    border: none;
+    border-radius: 10px;
+    background: #ffffff; /* يعطي إحساس أن الخلفية بيضاء */
+}
+
+
+   footer {
+      text-align: center;
+      padding: 35px;
+      background: var(--dark-orange);
+      color: #fff;
+      font-size: 14px;
+    }
+      .feature-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: var(--main-orange);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .feature-btn:hover {
+        background: var(--main-wight); /* الخلفية تصير برتقالي */
+        color:  var(--main-orange); /* الخط يصير أبيض */
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    }
+</style>
+  <footer>
+    © 2026 جميع الحقوق محفوظة
+  </footer>
+</body>
+</html>
